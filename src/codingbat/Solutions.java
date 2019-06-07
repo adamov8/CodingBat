@@ -1,6 +1,7 @@
 package codingbat;
 
 import java.util.Arrays;
+import java.util.Map;
 
 public class Solutions {
 
@@ -1093,5 +1094,417 @@ public class Solutions {
 			}
 		}
 		return true;
+	}
+	
+	public boolean isEverywhere(int[] nums, int val) {
+		for (int i = 1; i < nums.length; i++) {
+			if (nums[i - 1] != val && nums[i] != val) {
+				return false;
+			}
+		}
+
+		return true;
+	}
+	
+	public boolean either24(int[] nums) {
+		boolean twoTwo = false, fourFour = false;
+
+		for (int i = 1; i < nums.length; i++) {
+			if (nums[i - 1] == 2 && nums[i] == 2) {
+				twoTwo = true;
+			}
+			if (nums[i - 1] == 4 && nums[i] == 4) {
+				fourFour = true;
+			}
+		}
+
+		return (twoTwo && !fourFour) || (!twoTwo && fourFour);
+	}
+	
+	public int matchUp(int[] nums1, int[] nums2) {
+		int diffCount = 0;
+		for (int i = 0; i < nums1.length; i++) {
+			if (Math.abs(nums1[i] - nums2[i]) <= 2 && nums1[i] != nums2[i]) {
+				diffCount++;
+			}
+		}
+
+		return diffCount;
+	}
+	
+	public boolean has77(int[] nums) {
+		for (int i = 1; i < nums.length; i++) {
+			if (nums[i - 1] == 7 && nums[i] == 7) {
+				return true;
+			}
+			if (i < nums.length && i > 1 && nums[i - 2] == 7 && nums[i] == 7) {
+				return true;
+			}
+		}
+
+		return false;
+	}
+	
+	public boolean has12(int[] nums) {
+		boolean hasOne = false;
+		for (int i = 0; i < nums.length; i++) {
+			if (nums[i] == 1) {
+				hasOne = true;
+			}
+			if (hasOne && nums[i] == 2) {
+				return true;
+			}
+		}
+
+		return false;
+	}
+
+	public boolean modThree(int[] nums) {
+		for (int i = 2; i < nums.length; i++) {
+			if ((nums[i - 2] % 2 == 0 && nums[i - 1] % 2 == 0 && nums[i] % 2 == 0)
+					|| (nums[i - 2] % 2 == 1 && nums[i - 1] % 2 == 1 && nums[i] % 2 == 1)) {
+				return true;
+			}
+		}
+
+		return false;
+	}
+	
+	public boolean haveThree(int[] nums) {
+		int cnt = 0;
+		boolean hasTripleThrees = false;
+		if (nums.length < 5) {
+			return false;
+		}
+		for (int i = 0; i < nums.length; i++) {
+			if (nums[i] == 3) {
+				cnt++;
+			}
+			if (i >= 4 && (nums[i] == 3 && nums[i - 2] == 3 && nums[i - 4] == 3)) {
+				hasTripleThrees = true;
+			}
+		}
+
+		if (cnt == 3 && hasTripleThrees) {
+			return true;
+		}
+
+		return false;
+	}
+
+	public boolean twoTwo(int[] nums) {
+		if (nums.length == 1 && nums[0] == 2) {
+			return false;
+		}
+		if (nums.length == 2 && (nums[0] != 2 || nums[1] != 2)) {
+			return false;
+		}
+
+		for (int i = 1; i < nums.length - 1; i++) {
+			if ((nums[i - 1] != 2 && nums[i] == 2) && (nums[i] == 2 && nums[i + 1] != 2)) {
+				return false;
+			}
+			if (i == nums.length - 2 && nums[i] != 2 && nums[i + 1] == 2) {
+				return false;
+			}
+		}
+
+		return true;
+	}
+	
+	public boolean sameEnds(int[] nums, int len) {
+		if (len == nums.length) {
+			return true;
+		}
+
+		for (int i = 0; i < nums.length; i++) {
+			if (i < len && nums[i] != nums[nums.length - len + i]) {
+				return false;
+			}
+		}
+
+		return true;
+	}
+	
+	public boolean tripleUp(int[] nums) {
+		for (int i = 2; i < nums.length; i++) {
+			if (nums[i - 2] == nums[i - 1] - 1 && nums[i - 1] == nums[i] - 1) {
+				return true;
+			}
+		}
+
+		return false;
+	}
+	
+	public int[] fizzArray3(int start, int end) {
+		int[] arr = new int[end - start];
+		for (int i = 0; i < arr.length; i++) {
+			arr[i] = start;
+			start++;
+		}
+
+		return arr;
+	}
+	
+	public int[] shiftLeft(int[] nums) {
+		int[] arr = new int[nums.length];
+		for (int i = 0; i < arr.length; i++) {
+			if (i < arr.length - 1) {
+				arr[i] = nums[i + 1];
+			} else {
+				arr[arr.length - 1] = nums[0];
+			}
+		}
+
+		return arr;
+	}
+
+	public int[] tenRun(int[] nums) {
+		boolean multipleOfTen = false;
+		int tmp = 0;
+		for (int i = 0; i < nums.length; i++) {
+			if (nums[i] % 10 == 0) {
+				multipleOfTen = true;
+				tmp = nums[i];
+			}
+			if (multipleOfTen) {
+				nums[i] = tmp;
+			}
+		}
+
+		return nums;
+	}
+	
+	public int[] pre4(int[] nums) {
+		int size = 0;
+		if (nums.length == 1 || (nums.length == 2 && nums[1] != 4)) {
+			return new int[0];
+		}
+		boolean gotFour = false;
+		for (int i = 0; i < nums.length - 1; i++) {
+			if (nums[i] == 4) {
+				gotFour = true;
+			}
+			if (!gotFour) {
+				size++;
+			}
+		}
+		int[] arr = new int[size];
+		for (int i = 0; i < size; i++) {
+			arr[i] = nums[i];
+		}
+
+		return arr;
+	}
+
+	public int[] post4(int[] nums) {
+		boolean gotFour = false;
+		int size = 0;
+
+		for (int i = nums.length - 1; i > 0; i--) {
+			if (nums[i] == 4) {
+				gotFour = true;
+			}
+			if (!gotFour) {
+				size++;
+			}
+		}
+		int[] arr = new int[size];
+		int j = 0;
+		for (int i = nums.length - size; i < nums.length; i++) {
+			arr[j] = nums[i];
+			j++;
+		}
+
+		return arr;
+	}
+
+	public int[] notAlone(int[] nums, int val) {
+		for (int i = 1; i < nums.length - 1; i++) {
+			if (nums[i] == val && nums[i] != nums[i - 1] && nums[i] != nums[i + 1]) {
+				nums[i] = nums[i - 1] < nums[i + 1] ? nums[i + 1] : nums[i - 1];
+			}
+		}
+
+		return nums;
+	}
+
+	public int[] zeroFront(int[] nums) {
+		int[] arr = new int[nums.length];
+
+		int j = 0;
+		for (int i = 0; i < nums.length; i++) {
+			if (nums[i] == 0) {
+				j++;
+			}
+		}
+		for (int i = 0; i < nums.length; i++) {
+			if (nums[i] != 0) {
+				arr[j] = nums[i];
+				j++;
+			}
+		}
+
+		return arr;
+	}
+
+	public int[] withoutTen(int[] nums) {
+		int[] arr = new int[nums.length];
+
+		int j = 0;
+		for (int i = 0; i < nums.length; i++) {
+			if (nums[i] != 10) {
+				arr[j] = nums[i];
+				j++;
+			}
+		}
+		return arr;
+	}
+	
+	public int[] zeroMax(int[] nums) {
+		int largestOdd = 0;
+
+		for (int i = nums.length - 1; i >= 0; i--) {
+			if (nums[i] % 2 == 1 && nums[i] > largestOdd) {
+				largestOdd = nums[i];
+			}
+			if (nums[i] == 0) {
+				nums[i] = largestOdd;
+			}
+		}
+
+		return nums;
+	}
+
+	public int[] evenOdd(int[] nums) {
+		int[] arr = new int[nums.length];
+
+		int j = 0;
+		for (int i = 0; i < nums.length; i++) {
+			if (nums[i] % 2 == 0) {
+				arr[j] = nums[i];
+				j++;
+			}
+		}
+		for (int i = 0; i < nums.length; i++) {
+			if (nums[i] % 2 == 1) {
+				arr[j] = nums[i];
+				j++;
+			}
+		}
+
+		return arr;
+	}
+
+	public String[] fizzBuzz(int start, int end) {
+		String[] sarr = new String[end - start];
+		for (int i = start; i < end; i++) {
+			if (i % 3 == 0 && i % 5 != 0) {
+				sarr[i - start] = "Fizz";
+			} else if (i % 3 != 0 && i % 5 == 0) {
+				sarr[i - start] = "Buzz";
+			} else if (i % 3 == 0 && i % 5 == 0) {
+				sarr[i - start] = "FizzBuzz";
+			} else {
+				sarr[i - start] = String.valueOf(i);
+			}
+		}
+
+		return sarr;
+	}
+	
+	// Map-1
+	public Map<String, String> mapBully(Map<String, String> map) {
+		if (map.containsKey("a") && map.get("a").length() > 0) {
+			map.put("b", map.get("a"));
+			map.put("a", "");
+		}
+
+		return map;
+	}
+
+	public Map<String, String> mapShare(Map<String, String> map) {
+		if (map.containsKey("a") && map.get("a").length() > 0) {
+			map.put("b", map.get("a"));
+		}
+		if (map.containsKey("c")) {
+			map.remove("c");
+		}
+
+		return map;
+	}
+
+	public Map<String, String> mapAB(Map<String, String> map) {
+		if (map.containsKey("a") && map.containsKey("b")) {
+			map.put("ab", map.get("a") + map.get("b"));
+		}
+
+		return map;
+	}
+	
+	public Map<String, String> topping1(Map<String, String> map) {
+		if (map.containsKey("ice cream")) {
+			map.replace("ice cream", "cherry");
+		}
+
+		map.put("bread", "butter");
+
+		return map;
+	}
+	
+	public Map<String, String> topping2(Map<String, String> map) {
+		if (map.containsKey("ice cream") && map.get("ice cream").length() > 0) {
+			map.put("yogurt", map.get("ice cream"));
+		}
+
+		if (map.containsKey("spinach") && map.get("spinach").length() > 0) {
+			map.replace("spinach", "nuts");
+		}
+
+		return map;
+	}
+	
+	public Map<String, String> topping3(Map<String, String> map) {
+		if (map.containsKey("potato") && map.get("potato").length() > 0) {
+			map.put("fries", map.get("potato"));
+		}
+		if (map.containsKey("salad") && map.get("salad").length() > 0) {
+			map.put("spinach", map.get("salad"));
+		}
+
+		return map;
+	}
+
+	public Map<String, String> mapAB2(Map<String, String> map) {
+		if (map.containsKey("a") && map.containsKey("b") && map.get("a").equals(map.get("b"))) {
+			map.remove("a");
+			map.remove("b");
+		}
+
+		return map;
+	}
+	
+	public Map<String, String> mapAB3(Map<String, String> map) {
+		if (map.containsKey("a") && !map.containsKey("b")) {
+			map.put("b", map.get("a"));
+		}
+		if (map.containsKey("b") && !map.containsKey("a")) {
+			map.put("a", map.get("b"));
+		}
+
+		return map;
+	}
+
+	public Map<String, String> mapAB4(Map<String, String> map) {
+		if (map.containsKey("a") && map.containsKey("b") && map.get("a").length() != map.get("b").length()) {
+			String longerVal = map.get("a").length() > map.get("b").length() ? map.get("a") : map.get("b");
+			map.put("c", longerVal);
+		}
+		if (map.containsKey("a") && map.containsKey("b") && map.get("a").length() == map.get("b").length()) {
+			map.replace("a", "");
+			map.replace("b", "");
+		}
+
+		return map;
 	}
 }
