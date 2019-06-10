@@ -1,6 +1,8 @@
 package codingbat;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 
 public class Solutions {
@@ -1095,7 +1097,7 @@ public class Solutions {
 		}
 		return true;
 	}
-	
+
 	public boolean isEverywhere(int[] nums, int val) {
 		for (int i = 1; i < nums.length; i++) {
 			if (nums[i - 1] != val && nums[i] != val) {
@@ -1105,7 +1107,7 @@ public class Solutions {
 
 		return true;
 	}
-	
+
 	public boolean either24(int[] nums) {
 		boolean twoTwo = false, fourFour = false;
 
@@ -1120,7 +1122,7 @@ public class Solutions {
 
 		return (twoTwo && !fourFour) || (!twoTwo && fourFour);
 	}
-	
+
 	public int matchUp(int[] nums1, int[] nums2) {
 		int diffCount = 0;
 		for (int i = 0; i < nums1.length; i++) {
@@ -1131,7 +1133,7 @@ public class Solutions {
 
 		return diffCount;
 	}
-	
+
 	public boolean has77(int[] nums) {
 		for (int i = 1; i < nums.length; i++) {
 			if (nums[i - 1] == 7 && nums[i] == 7) {
@@ -1144,7 +1146,7 @@ public class Solutions {
 
 		return false;
 	}
-	
+
 	public boolean has12(int[] nums) {
 		boolean hasOne = false;
 		for (int i = 0; i < nums.length; i++) {
@@ -1169,7 +1171,7 @@ public class Solutions {
 
 		return false;
 	}
-	
+
 	public boolean haveThree(int[] nums) {
 		int cnt = 0;
 		boolean hasTripleThrees = false;
@@ -1211,7 +1213,7 @@ public class Solutions {
 
 		return true;
 	}
-	
+
 	public boolean sameEnds(int[] nums, int len) {
 		if (len == nums.length) {
 			return true;
@@ -1225,7 +1227,7 @@ public class Solutions {
 
 		return true;
 	}
-	
+
 	public boolean tripleUp(int[] nums) {
 		for (int i = 2; i < nums.length; i++) {
 			if (nums[i - 2] == nums[i - 1] - 1 && nums[i - 1] == nums[i] - 1) {
@@ -1235,7 +1237,7 @@ public class Solutions {
 
 		return false;
 	}
-	
+
 	public int[] fizzArray3(int start, int end) {
 		int[] arr = new int[end - start];
 		for (int i = 0; i < arr.length; i++) {
@@ -1245,7 +1247,7 @@ public class Solutions {
 
 		return arr;
 	}
-	
+
 	public int[] shiftLeft(int[] nums) {
 		int[] arr = new int[nums.length];
 		for (int i = 0; i < arr.length; i++) {
@@ -1274,7 +1276,7 @@ public class Solutions {
 
 		return nums;
 	}
-	
+
 	public int[] pre4(int[] nums) {
 		int size = 0;
 		if (nums.length == 1 || (nums.length == 2 && nums[1] != 4)) {
@@ -1360,7 +1362,7 @@ public class Solutions {
 		}
 		return arr;
 	}
-	
+
 	public int[] zeroMax(int[] nums) {
 		int largestOdd = 0;
 
@@ -1412,7 +1414,7 @@ public class Solutions {
 
 		return sarr;
 	}
-	
+
 	// Map-1
 	public Map<String, String> mapBully(Map<String, String> map) {
 		if (map.containsKey("a") && map.get("a").length() > 0) {
@@ -1441,7 +1443,7 @@ public class Solutions {
 
 		return map;
 	}
-	
+
 	public Map<String, String> topping1(Map<String, String> map) {
 		if (map.containsKey("ice cream")) {
 			map.replace("ice cream", "cherry");
@@ -1451,7 +1453,7 @@ public class Solutions {
 
 		return map;
 	}
-	
+
 	public Map<String, String> topping2(Map<String, String> map) {
 		if (map.containsKey("ice cream") && map.get("ice cream").length() > 0) {
 			map.put("yogurt", map.get("ice cream"));
@@ -1463,7 +1465,7 @@ public class Solutions {
 
 		return map;
 	}
-	
+
 	public Map<String, String> topping3(Map<String, String> map) {
 		if (map.containsKey("potato") && map.get("potato").length() > 0) {
 			map.put("fries", map.get("potato"));
@@ -1483,7 +1485,7 @@ public class Solutions {
 
 		return map;
 	}
-	
+
 	public Map<String, String> mapAB3(Map<String, String> map) {
 		if (map.containsKey("a") && !map.containsKey("b")) {
 			map.put("b", map.get("a"));
@@ -1506,5 +1508,316 @@ public class Solutions {
 		}
 
 		return map;
+	}
+
+	// Array-3
+	public int maxSpan(int[] nums) {
+		if (nums.length == 0) {
+			return 0;
+		}
+		int maxSpan = 0;
+
+		// with lists
+		List<Integer> alist = new ArrayList<>();
+		for (int i = 0; i < nums.length; i++) {
+			alist.add(nums[i]);
+		}
+		for (int i = 0; i < alist.size(); i++) {
+			if ((alist.lastIndexOf(alist.get(i)) - alist.indexOf(alist.get(i))) > maxSpan) {
+				maxSpan = alist.lastIndexOf(alist.get(i)) - alist.indexOf(alist.get(i));
+			}
+		}
+
+		return maxSpan + 1;
+
+//		// with nested for loops
+//		for (int i = 0; i < nums.length; i++) {
+//			for (int j = i +1; j < nums.length; j++) {
+//				if (nums[i] == nums[j] && j - i > maxSpan) maxSpan = j-i;
+//			}
+//		}
+//
+//		return maxSpan+1;
+	}
+
+	public int[] fix34(int[] nums) {
+		for (int i = 0; i < nums.length; i++) {
+			if (nums[i] == 3) {
+				int temp = nums[i + 1];
+				nums[i + 1] = 4;
+				for (int j = i + 2; j < nums.length; j++) {
+					if (nums[j] == 4) {
+						nums[j] = temp;
+					}
+				}
+			}
+		}
+		return nums;
+	}
+
+	public int[] fix45(int[] nums) {
+
+		int tmpIdx = Integer.MIN_VALUE;
+		for (int i = 0; i < nums.length; i++) {
+			if (nums[i] == 5 && i != tmpIdx + 1) {
+
+				for (int j = 0; j < nums.length; j++) {
+					if (nums[j] == 4 && j > tmpIdx) {
+
+						tmpIdx = j;
+						int tmp = nums[j + 1];
+						nums[j + 1] = nums[i];
+						nums[i] = tmp;
+
+						if (nums[i] == nums[j + 1]) {
+							i--;
+						}
+						break;
+					}
+				}
+			}
+		}
+
+		return nums;
+	}
+
+	public boolean canBalance(int[] nums) {
+		int sum1 = 0, sum2;
+
+		for (int i = 0; i < nums.length; i++) {
+			sum1 += nums[i];
+			sum2 = 0;
+			for (int j = nums.length - 1; j > i; j--) {
+				sum2 += nums[j];
+			}
+			if (sum1 == sum2) {
+				return true;
+			}
+		}
+
+		return false;
+	}
+
+	public boolean linearIn(int[] outer, int[] inner) {
+		int cnt = 0;
+
+		int j = 0;
+		for (int i = 0; i < outer.length; i++) {
+			if (cnt < inner.length && outer[i] == inner[j]) {
+				cnt++;
+				j++;
+			}
+		}
+
+		return cnt == inner.length;
+	}
+
+	public int[] squareUp(int n) {
+		int[] arr = new int[n * n];
+
+		int cnt = 0;
+		int block = 0;
+		for (int i = arr.length - 1; i >= 0; i--) {
+			if (block == 0) {
+				arr[i] = ++cnt;
+			} else {
+				++cnt;
+				if (cnt <= n - block) {
+					arr[i] = cnt;
+				}
+			}
+			if (cnt == n) {
+				cnt = 0;
+				block++;
+			}
+		}
+
+		return arr;
+	}
+
+	public int[] seriesUp(int n) {
+		int[] arr = new int[n * (n + 1) / 2];
+
+		int j = 0;
+		for (int i = 1; i < n + 1; i++) {
+			for (int k = 1; k < i + 1; k++) {
+				arr[j] = k;
+				j++;
+			}
+		}
+
+		return arr;
+	}
+
+	public int maxMirror(int[] nums) {
+		int max = 0, count;
+		for (int i = 0; i < nums.length; i++) {
+			count = 0;
+			for (int j = nums.length - 1; j >= 0 && count + i < nums.length; j--) {
+				if (nums[count + i] == nums[j]) {
+					count++;
+				} else if (count > 0) {
+					max = Math.max(max, count);
+					count = 0;
+				}
+			}
+			max = Math.max(max, count);
+		}
+
+		return max;
+	}
+
+	public int countClumps(int[] nums) {
+		int count = 0;
+		int j;
+		for (int i = 0; i < nums.length - 1; i++) {
+			j = i + 1;
+			if (nums[i] == nums[j]) {
+				while (j < nums.length && nums[i] == nums[j]) {
+					j++;
+				}
+				i = j - 1;
+				count++;
+			}
+		}
+
+		return count;
+	}
+
+	// Logic-2
+	public boolean makeBricks(int small, int big, int goal) {
+		if (goal > big * 5 + small) {
+			return false;
+		}
+		if (goal % 5 > small) {
+			return false;
+		}
+
+		return true;
+	}
+
+	public int loneSum(int a, int b, int c) {
+		int sum = 0;
+
+		boolean aDup = true, bDup = true, cDup = true;
+
+		if (a != b && a != c) {
+			aDup = false;
+		}
+		if (b != a && b != c) {
+			bDup = false;
+		}
+		if (c != a && c != b) {
+			cDup = false;
+		}
+
+		sum += !aDup ? a : 0;
+		sum += !bDup ? b : 0;
+		sum += !cDup ? c : 0;
+
+		return sum;
+	}
+
+	public int luckySum(int a, int b, int c) {
+
+		if (a == 13) {
+			return 0;
+		}
+		if (b == 13) {
+			return a;
+		}
+		if (c == 13) {
+			return a + b;
+		}
+
+		return a + b + c;
+	}
+
+	public int noTeenSum(int a, int b, int c) {
+		int sum = 0;
+
+		sum += fixTeen(a);
+		sum += fixTeen(b);
+		sum += fixTeen(c);
+
+		return sum;
+	}
+
+	public int fixTeen(int n) {
+
+		if (n >= 13 && n <= 19 && n != 15 && n != 16) {
+			return 0;
+		}
+
+		return n;
+	}
+
+	public int roundSum(int a, int b, int c) {
+		int sum = 0;
+		sum += round10(a);
+		sum += round10(b);
+		sum += round10(c);
+
+		return sum;
+	}
+
+	public int round10(int num) {
+
+		if (num % 10 >= 5) {
+			return num + (10 - num % 10);
+		} else {
+			return num - (num % 10);
+		}
+	}
+
+	public boolean closeFar(int a, int b, int c) {
+		if (Math.abs(a - b) <= 1 && Math.abs(a - c) >= 2 && Math.abs(b - c) >= 2) {
+			return true;
+		}
+
+		if (Math.abs(a - c) <= 1 && Math.abs(a - b) >= 2 && Math.abs(c - b) >= 2) {
+			return true;
+		}
+
+		return false;
+	}
+
+	public int blackjack(int a, int b) {
+		if (a > 21 && b > 21) {
+			return 0;
+		}
+
+		int aDiff = Integer.MAX_VALUE, bDiff = Integer.MAX_VALUE;
+		if (a <= 21) {
+			aDiff = Math.abs(a - 21);
+		}
+		if (b <= 21) {
+			bDiff = Math.abs(b - 21);
+		}
+
+		return aDiff < bDiff ? a : b;
+	}
+
+	public boolean evenlySpaced(int a, int b, int c) {
+		int[] abc = {a, b, c};
+		Arrays.sort(abc);
+		
+		int abDiff = Math.abs(abc[0] - abc[1]), bcDiff = Math.abs(abc[1] - abc[2]);
+		
+		return abDiff == bcDiff;
+	}
+
+	public int makeChocolate(int small, int big, int goal) {
+		
+		if (goal > small + big*5) return -1;
+		if (goal % 5 > small) return -1;
+
+		int sum = 0, bigCnt = 0;
+		while (sum <= goal && bigCnt <= big){
+			sum += 5;
+			bigCnt++;
+		}
+		
+		return goal - ((bigCnt - 1) * 5);
 	}
 }
